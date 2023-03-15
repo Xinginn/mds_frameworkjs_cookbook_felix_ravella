@@ -6,6 +6,9 @@
     :ingredient="item"
     @boughtChanged="onItemBoughtChanged"
   />
+  <button type="button" @click="checkAll">Check all</button>
+  <button type="button" @click="clearAllChecked">Clear checked items</button>
+  <button type="button" @click="clearAll">Clear all</button>
 </template>
 
 <script>
@@ -33,6 +36,19 @@ export default {
   methods: {
     onItemBoughtChanged(index, value){
       this.mutableData[index].bought = value;
+      this.$emit('dataChanged', this.mutableData);
+    },
+    checkAll(){
+      this.mutableData.map(item => item.bought = true);
+      this.$emit('dataChanged', this.mutableData);
+    },
+    clearAll(){
+      this.$emit('dataChanged', []);
+    },
+    clearAllChecked(){
+      this.mutableData = this.mutableData.filter((item) => {
+        return item.bought === false
+      })
       this.$emit('dataChanged', this.mutableData);
     }
   }
