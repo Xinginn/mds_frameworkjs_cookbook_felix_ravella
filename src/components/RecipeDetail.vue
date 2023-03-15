@@ -4,15 +4,12 @@
     <input class="recipe-edit-title-input" type="text" v-model="mutableData.title">
 
     <!-- Description  -->
-    <textarea class="recipe-edit-description-input" v-model="mutableData.description"
-      rows="10" cols="40"
-    >
-    </textarea>
+    <input class="recipe-edit-description-input" v-model="mutableData.description">
 
     <!-- Ingredients List -->
     <div class="recipe-ingredient" v-for="item,index of mutableData.ingredients" :key="index">
       <input class="recipe-ingredient-input" v-model="mutableData.ingredients[index]">
-      <button class="recipe-ingredient-delete-button" type="button">X</button>
+      <button class="recipe-ingredient-delete-button" type="button" @click="deleteIngredient(index)">X</button>
     </div>
 
     <!-- New ingredient field -->
@@ -56,6 +53,9 @@ export default {
     addIngredient(){
       this.mutableData.ingredients.push(this.newIngredient);
       this.newIngredient = ""
+    },
+    deleteIngredient(index){
+      this.mutableData.ingredients.splice(index,1);
     },
     saveChanges(){
       this.$emit('dataChanged', this.recipeIndex, this.mutableData)

@@ -20,10 +20,9 @@
         @requestEdit="(recipeIndex) => selectedRecipe = recipeIndex"
         @requestDelete="(recipeIndex) => recipes.splice(recipeIndex, 1)"
         />
-      <br>
     </div>
 
-    <!-- Recipe view and edition; only displayed if a recipe is selected by clicking on 'Edit' -->
+    <!-- Recipe view and edition; displayed only if a recipe is selected by clicking on 'Edit' -->
     <RecipeDetail v-if="selectedRecipe !== null"
       :key="selectedRecipe"
       :recipeIndex="selectedRecipe"
@@ -78,7 +77,7 @@ export default {
       selectedRecipe: null,
       newRecipeTitle: "",
       shoppingList: [],
-      shoppingRefresh: 0
+      shoppingRefresh: 0, // used as key to ensure refresh of ShoppingList component
     }
   },
   methods:{

@@ -1,12 +1,16 @@
 <template>
   <div class="shopping-list">
+
     <h1 class="shopping-list-title">Shopping List</h1>
+
     <ShoppingItem v-for="item,index of mutableData" 
       :key="index"
       :ingedientIndex="index" 
       :ingredient="item"
       @boughtChanged="onItemBoughtChanged"
     />
+
+    <!-- Buttons for list check handling -->
     <div class="shopping-list-actions">
       <button type="button" @click="checkAll">Check all</button>
       <button type="button" @click="clearAllChecked">Clear checked items</button>
