@@ -3,7 +3,7 @@
   <h1>Recipe Book</h1>
   <form @submit.prevent="addRecipe">
     <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
-    <button type="submit">Add</button>
+    <button type="submit" :disabled="newRecipeTitle === ''">Add</button>
   </form>
 
   <RecipeButton v-for="item,index of recipes" 
@@ -13,15 +13,24 @@
     @requestEdit="(recipeIndex) => selectedRecipe = recipeIndex"
     @requestDelete="(recipeIndex) => recipes.splice(recipeIndex, 1)"
     />
+  <br>
+  <RecipeDetail v-if="selectedRecipe !== null"
+    :key="selectedRecipe"
+    :recipeIndex="selectedRecipe"
+    :initialData="recipes[selectedRecipe]"
+    @dataChanged="onRecipeDataChanged"
+  />
 </template>
 
-<script lang="ts">
+<script>
 import RecipeButton from './components/RecipeButton.vue'
+import RecipeDetail from './components/RecipeDetail.vue'
 
 export default {
   name: 'App',
   components:{
-    RecipeButton
+    RecipeButton,
+    RecipeDetail
   },
   data(){
     return {
@@ -57,6 +66,9 @@ export default {
         ingredients: []
       });
       this.newRecipeTitle = "";
+    },
+    onRecipeDataChanged(index, data){
+      this.recipes[index] = {...data};
     }
   }
   

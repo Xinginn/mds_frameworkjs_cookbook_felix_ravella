@@ -2,11 +2,12 @@
   <span>{{title}}</span>
   <button type="button" @click="() => $emit('requestEdit', recipeIndex)">Edit</button>
   <button type="button" @click="() => $emit('requestDelete', recipeIndex)">Delete</button>
+  <br>
 </template>
 
-<script lang="ts">
+<script>
 export default {
-  name:'RecipeButton',
+  name: 'RecipeButton',
   props: {
     recipeIndex: Number,
     title: String
