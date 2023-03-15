@@ -1,6 +1,9 @@
 
 <template>
   <h1>Recipe Book</h1>
+
+shoppingList: {{ shoppingList }}
+
   <!-- New recipe form -->
   <form @submit.prevent="addRecipe">
     <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
@@ -23,9 +26,10 @@
     :recipeIndex="selectedRecipe"
     :initialData="recipes[selectedRecipe]"
     @dataChanged="onRecipeDataChanged"
+    @addToList="onAddToListClicked"
   />
 
-  <ShoppingList />
+  <ShoppingList :ingredients="shoppingList"/>
     
 </template>
 
@@ -55,7 +59,7 @@ export default {
         },        
         {
           title: "Cabage soup",
-          description: "A delicious dish from England made with beef",
+          description: "A mediocre specialty from Britain, with cabbage and other vegetables.",
           ingredients: [
             "1 cabage",
             "3 potatoes",
@@ -64,7 +68,8 @@ export default {
         },
       ],
       selectedRecipe: null,
-      newRecipeTitle: ""
+      newRecipeTitle: "",
+      shoppingList: []
     }
   },
   methods:{
@@ -78,9 +83,18 @@ export default {
     },
     onRecipeDataChanged(index, data){
       this.recipes[index] = {...data};
+      this.selectedRecipe = null;
+    },
+    onAddToListClicked(index){
+      // create a new array of objects with label(ingredient) and bought(default as false) rom the ingredient list
+      const addedIngredients = this.recipes[index].ingredients.reduce((stack, current)=> {
+        return [...stack, {label: current, bought: false}]
+      }, []);
+      // then concats it with the current shoppingList
+      this.shoppingList = this.shoppingList.concat(addedIngredients);
+      this.selectedRecipe = null;
     }
   }
-  
 }
 </script>
 

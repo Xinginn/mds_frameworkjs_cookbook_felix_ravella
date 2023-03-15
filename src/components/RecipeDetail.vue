@@ -23,6 +23,7 @@
     <br>
 
     <button type="submit">Save</button>
+    <button type="button" @click="addToList">Add to shopping list</button>
   </form>
 </template>
 
@@ -34,7 +35,8 @@ export default {
     initialData: Object
   },
   emits: [
-    'dataChanged'
+    'dataChanged',
+    'addToList'
   ],
   mounted() {
     this.mutableData = {...this.initialData}
@@ -56,6 +58,9 @@ export default {
     },
     saveChanges(){
       this.$emit('dataChanged', this.recipeIndex, this.mutableData)
+    },
+    addToList(){
+      this.$emit('addToList', this.recipeIndex)
     }
   }
 }

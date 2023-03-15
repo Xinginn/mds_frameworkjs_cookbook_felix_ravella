@@ -1,5 +1,7 @@
 <template>
-  ShoppingList
+  inside shopping list
+  <br>
+  ingredients: {{ ingredients }}
 </template>
 
 <script>
@@ -9,6 +11,6 @@ export default {
     ingredients: Array
   },
   emits:[
-  ]
+  ],
 }
 </script>
