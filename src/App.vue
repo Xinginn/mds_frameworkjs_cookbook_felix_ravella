@@ -14,23 +14,31 @@
     @requestDelete="(recipeIndex) => recipes.splice(recipeIndex, 1)"
     />
   <br>
+
+  <!-- only displayed if a recipe is selected by clicking on 'Edit' -->
   <RecipeDetail v-if="selectedRecipe !== null"
     :key="selectedRecipe"
     :recipeIndex="selectedRecipe"
     :initialData="recipes[selectedRecipe]"
     @dataChanged="onRecipeDataChanged"
   />
+
+  <ShoppingList />
+    
+  
 </template>
 
 <script>
 import RecipeButton from './components/RecipeButton.vue'
 import RecipeDetail from './components/RecipeDetail.vue'
+import ShoppingList from './components/ShoppingList.vue'
 
 export default {
   name: 'App',
   components:{
     RecipeButton,
-    RecipeDetail
+    RecipeDetail,
+    ShoppingList
   },
   data(){
     return {
