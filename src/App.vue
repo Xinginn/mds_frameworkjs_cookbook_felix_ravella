@@ -1,11 +1,13 @@
 
 <template>
   <h1>Recipe Book</h1>
+  <!-- New recipe form -->
   <form @submit.prevent="addRecipe">
     <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
     <button type="submit" :disabled="newRecipeTitle === ''">Add</button>
   </form>
 
+  <!-- List of Recipes + Buttons for Edit & Delete-->
   <RecipeButton v-for="item,index of recipes" 
     :key="index"
     :recipeIndex="index"
@@ -15,7 +17,7 @@
     />
   <br>
 
-  <!-- only displayed if a recipe is selected by clicking on 'Edit' -->
+  <!-- Recipe view and edition; only displayed if a recipe is selected by clicking on 'Edit' -->
   <RecipeDetail v-if="selectedRecipe !== null"
     :key="selectedRecipe"
     :recipeIndex="selectedRecipe"
@@ -25,7 +27,6 @@
 
   <ShoppingList />
     
-  
 </template>
 
 <script>
