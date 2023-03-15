@@ -15,7 +15,7 @@
     <!-- New ingredient field -->
     <div class="recipe-new-ingredient">
       <input class="recipe-new-ingredient-input" v-model="newIngredient">
-      <button type="button" placeholder="Add a new ingredient..." @click="addIngredient">Add</button>
+      <button class="recipe-new-ingredient-add-button" type="button" :disabled="newIngredient === ''" placeholder="Add a new ingredient..." @click="addIngredient">Add</button>
     </div>
 
     <div class="recipe-edit-actions">

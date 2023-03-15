@@ -95,6 +95,10 @@ input[type="checkbox"]:checked {
   background-color: #415c71;
 }
 
+.recipe-create-button:disabled {
+  background-color: #888888;
+}
+
 .recipe-book {
   display: flex;
   flex-direction: column;
@@ -231,6 +235,10 @@ input[type="checkbox"]:checked {
   padding: 1rem;
 }
 
+.recipe-new-ingredient-add-button:disabled {
+  background-color: #888888;
+}
+
 .recipe-edit-save-button, .recipe-edit-cart-button {
   flex: 1;
 }
@@ -249,6 +257,7 @@ input[type="checkbox"]:checked {
   background-color: transparent;
   color: #45627d;
 }
+
 .recipe-ingredient:hover .recipe-ingredient-delete-button {
   opacity: 1;
 }
