@@ -1,37 +1,43 @@
 
 <template>
-  <h1>Recipe Book</h1>
 
-  <!-- New recipe form -->
-  <form @submit.prevent="addRecipe">
-    <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
-    <button type="submit" :disabled="newRecipeTitle === ''">Add</button>
-  </form>
 
-  <!-- List of Recipes + Buttons for Edit & Delete-->
-  <RecipeButton v-for="item,index of recipes" 
-    :key="index"
-    :recipeIndex="index"
-    :title="item.title"
-    @requestEdit="(recipeIndex) => selectedRecipe = recipeIndex"
-    @requestDelete="(recipeIndex) => recipes.splice(recipeIndex, 1)"
+  <div class="main">
+    <h1 class="main-title">Recipe Book</h1>
+
+    <!-- New recipe form -->
+    <form class="new-recipe-form" @submit.prevent="addRecipe">
+      <input class="recipe-title-input" type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
+      <button class="recipe-create-button" type="submit" :disabled="newRecipeTitle === ''">Add</button>
+    </form>
+
+    <div class="recipe-book">
+      <!-- List of Recipes + Buttons for Edit & Delete-->
+      <RecipeButton v-for="item,index of recipes" 
+        :key="index"
+        :recipeIndex="index"
+        :title="item.title"
+        @requestEdit="(recipeIndex) => selectedRecipe = recipeIndex"
+        @requestDelete="(recipeIndex) => recipes.splice(recipeIndex, 1)"
+        />
+      <br>
+    </div>
+
+    <!-- Recipe view and edition; only displayed if a recipe is selected by clicking on 'Edit' -->
+    <RecipeDetail v-if="selectedRecipe !== null"
+      :key="selectedRecipe"
+      :recipeIndex="selectedRecipe"
+      :initialData="recipes[selectedRecipe]"
+      @dataChanged="onRecipeDataChanged"
+      @addToList="onAddToListClicked"
     />
-  <br>
 
-  <!-- Recipe view and edition; only displayed if a recipe is selected by clicking on 'Edit' -->
-  <RecipeDetail v-if="selectedRecipe !== null"
-    :key="selectedRecipe"
-    :recipeIndex="selectedRecipe"
-    :initialData="recipes[selectedRecipe]"
-    @dataChanged="onRecipeDataChanged"
-    @addToList="onAddToListClicked"
-  />
-
-  <ShoppingList 
-    :initialData="shoppingList"
-    :key="shoppingRefresh"
-    @dataChanged="onShoppingListChanged"
-  />
+    <ShoppingList 
+      :initialData="shoppingList"
+      :key="shoppingRefresh"
+      @dataChanged="onShoppingListChanged"
+    />
+  </div>
     
 </template>
 

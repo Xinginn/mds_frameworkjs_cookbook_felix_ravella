@@ -1,29 +1,30 @@
 <template>
-  <form @submit.prevent="saveChanges">
+  <form class="recipe-edit-form" @submit.prevent="saveChanges">
     <!-- Title  -->
-    <input type="text" v-model="mutableData.title">
-    <br>
+    <input class="recipe-edit-title-input" type="text" v-model="mutableData.title">
 
     <!-- Description  -->
-    <textarea v-model="mutableData.description"
+    <textarea class="recipe-edit-description-input" v-model="mutableData.description"
       rows="10" cols="40"
     >
     </textarea>
-    <br>
 
     <!-- Ingredients List -->
-    <template v-for="item,index of mutableData.ingredients" :key="index">
-      <input v-model="mutableData.ingredients[index]">
-      <br>
-    </template>
+    <div class="recipe-ingredient" v-for="item,index of mutableData.ingredients" :key="index">
+      <input class="recipe-ingredient-input" v-model="mutableData.ingredients[index]">
+      <button class="recipe-ingredient-delete-button" type="button">X</button>
+    </div>
 
     <!-- New ingredient field -->
-    <input v-model="newIngredient">
-    <button type="button" @click="addIngredient">Add</button>
-    <br>
+    <div class="recipe-new-ingredient">
+      <input class="recipe-new-ingredient-input" v-model="newIngredient">
+      <button type="button" placeholder="Add a new ingredient..." @click="addIngredient">Add</button>
+    </div>
 
-    <button type="submit">Save</button>
-    <button type="button" @click="addToList">Add to shopping list</button>
+    <div class="recipe-edit-actions">
+      <button class="recipe-edit-save-button" type="submit">Save</button>
+      <button class="recipe-edit-cart-button" type="button" @click="addToList">Add to shopping list</button>
+    </div>
   </form>
 </template>
 

@@ -1,7 +1,8 @@
 <template>
-  <input type="checkbox" v-model="bought" @change="test">
-  <span>{{ ingredient.label }}</span>
-  <br>
+  <div class="shopping-list-item ">
+    <input type="checkbox" v-model="bought" @change="test">
+    <span>{{ ingredient.label }}</span>
+  </div>
 </template>
 
 <script>

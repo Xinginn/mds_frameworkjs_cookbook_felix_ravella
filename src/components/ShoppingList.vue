@@ -1,14 +1,18 @@
 <template>
-  <br>
-  <ShoppingItem v-for="item,index of mutableData" 
-    :key="index"
-    :ingedientIndex="index" 
-    :ingredient="item"
-    @boughtChanged="onItemBoughtChanged"
-  />
-  <button type="button" @click="checkAll">Check all</button>
-  <button type="button" @click="clearAllChecked">Clear checked items</button>
-  <button type="button" @click="clearAll">Clear all</button>
+  <div class="shopping-list">
+    <h1 class="shopping-list-title">Shopping List</h1>
+    <ShoppingItem v-for="item,index of mutableData" 
+      :key="index"
+      :ingedientIndex="index" 
+      :ingredient="item"
+      @boughtChanged="onItemBoughtChanged"
+    />
+    <div class="shopping-list-actions">
+      <button type="button" @click="checkAll">Check all</button>
+      <button type="button" @click="clearAllChecked">Clear checked items</button>
+      <button type="button" @click="clearAll">Clear all</button>
+    </div>
+  </div>
 </template>
 
 <script>
