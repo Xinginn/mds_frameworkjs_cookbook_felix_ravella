@@ -1,6 +1,11 @@
 
 <template>
   <h1>Recipe Book</h1>
+  <form @submit.prevent="addRecipe">
+    <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
+    <button type="submit">Add</button>
+  </form>
+
   <RecipeButton v-for="item,index of recipes" 
     :key="index"
     :recipeIndex="index"
@@ -40,7 +45,18 @@ export default {
           ]
         },
       ],
-      selectedRecipe: null
+      selectedRecipe: null,
+      newRecipeTitle: ""
+    }
+  },
+  methods:{
+    addRecipe(){
+      this.recipes.push({
+        title: this.newRecipeTitle,
+        description: "",
+        ingredients: []
+      });
+      this.newRecipeTitle = "";
     }
   }
   
