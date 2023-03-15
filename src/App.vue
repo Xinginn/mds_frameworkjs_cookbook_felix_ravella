@@ -2,8 +2,6 @@
 <template>
   <h1>Recipe Book</h1>
 
-shoppingList: {{ shoppingList }}
-
   <!-- New recipe form -->
   <form @submit.prevent="addRecipe">
     <input type="text" placeholder="Add a new recipe..." v-model="newRecipeTitle">
@@ -29,7 +27,11 @@ shoppingList: {{ shoppingList }}
     @addToList="onAddToListClicked"
   />
 
-  <ShoppingList :ingredients="shoppingList"/>
+  <ShoppingList 
+    :initialData="shoppingList"
+    :key="shoppingRefresh"
+    @dataChanged="onShoppingListChanged"
+  />
     
 </template>
 
@@ -69,7 +71,8 @@ export default {
       ],
       selectedRecipe: null,
       newRecipeTitle: "",
-      shoppingList: []
+      shoppingList: [],
+      shoppingRefresh: 0
     }
   },
   methods:{
@@ -93,6 +96,11 @@ export default {
       // then concats it with the current shoppingList
       this.shoppingList = this.shoppingList.concat(addedIngredients);
       this.selectedRecipe = null;
+      this.shoppingRefresh += 1;
+    },
+    onShoppingListChanged(data){
+      this.shoppingList = data;
+      this.shoppingRefresh += 1;
     }
   }
 }
